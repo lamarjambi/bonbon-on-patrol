@@ -446,11 +446,9 @@ export default function Home() {
                   <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50 mb-1">BonBon Device</h2>
                   <p className="text-xs text-slate-500 dark:text-slate-400">Complete monitoring system with AI capabilities</p>
                 </div>
-                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
-                  <svg width="32" height="32" viewBox="0 0 20 20" fill="white">
-                    <rect x="3" y="3" width="14" height="14" rx="2"/>
-                    <circle cx="10" cy="10" r="3"/>
-                  </svg>
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center overflow-hidden">
+                  {/* replace with real 3d model */}
+                  <img src="/bonbon-logo.png" alt="BonBon Device" className="w-14 h-14 object-contain"/> 
                 </div>
               </div>
               <div className="space-y-2 mb-4">
