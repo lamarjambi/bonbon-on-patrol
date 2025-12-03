@@ -305,11 +305,6 @@ export default function Home() {
                   </span>
                 </div>
               </div>
-              <div className="flex gap-2">
-                <button className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium">Record</button>
-                <button className="flex-1 px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-50 rounded-lg text-sm font-medium">Screenshot</button>
-                <button className="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-50 rounded-lg text-sm font-medium">Settings</button>
-              </div>
             </div>
 
             <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700">
