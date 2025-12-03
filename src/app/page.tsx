@@ -5,7 +5,13 @@ import { useState } from 'react';
 // 
 
 export default function Home() {
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'health' | 'location' | 'video' | 'alerts' | 'logs'>('dashboard');
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'health' | 'location' | 'video' | 'alerts' | 'shop'>('dashboard');
+  const [firstAidItems, setFirstAidItems] = useState({
+    bandages: 3,
+    antiseptic: 2,
+    gauze: 5,
+    medicalTape: 1,
+  });
 
   // in the real app, this would come from the BonBon device
   const vitalData = {
@@ -400,79 +406,198 @@ export default function Home() {
           </div>
         )}
 
-        {activeTab === 'logs' && (
+        {activeTab === 'shop' && (
           <div className="p-4 space-y-4">
+            {/* Current Inventory */}
             <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700">
-              <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50 mb-3">Current Inventory</h2>
+              <div className="space-y-2">
+                <div className="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+                  <span className="text-sm text-slate-700 dark:text-slate-300">Bandages</span>
+                  <span className={`text-sm font-medium ${firstAidItems.bandages === 0 ? 'text-red-600 dark:text-red-400' : firstAidItems.bandages < 3 ? 'text-yellow-600 dark:text-yellow-400' : 'text-green-600 dark:text-green-400'}`}>
+                    {firstAidItems.bandages} remaining
+                  </span>
+                </div>
+                <div className="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+                  <span className="text-sm text-slate-700 dark:text-slate-300">Antiseptic</span>
+                  <span className={`text-sm font-medium ${firstAidItems.antiseptic === 0 ? 'text-red-600 dark:text-red-400' : firstAidItems.antiseptic < 2 ? 'text-yellow-600 dark:text-yellow-400' : 'text-green-600 dark:text-green-400'}`}>
+                    {firstAidItems.antiseptic} remaining
+                  </span>
+                </div>
+                <div className="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+                  <span className="text-sm text-slate-700 dark:text-slate-300">Gauze</span>
+                  <span className={`text-sm font-medium ${firstAidItems.gauze === 0 ? 'text-red-600 dark:text-red-400' : firstAidItems.gauze < 3 ? 'text-yellow-600 dark:text-yellow-400' : 'text-green-600 dark:text-green-400'}`}>
+                    {firstAidItems.gauze} remaining
+                  </span>
+                </div>
+                <div className="flex items-center justify-between p-2 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+                  <span className="text-sm text-slate-700 dark:text-slate-300">Medical Tape</span>
+                  <span className={`text-sm font-medium ${firstAidItems.medicalTape === 0 ? 'text-red-600 dark:text-red-400' : firstAidItems.medicalTape < 2 ? 'text-yellow-600 dark:text-yellow-400' : 'text-green-600 dark:text-green-400'}`}>
+                    {firstAidItems.medicalTape} remaining
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Bonbon Device */}
+            <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700">
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex-1">
+                  <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50 mb-1">BonBon Device</h2>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Complete monitoring system with AI capabilities</p>
+                </div>
+                <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                  <svg width="32" height="32" viewBox="0 0 20 20" fill="white">
+                    <rect x="3" y="3" width="14" height="14" rx="2"/>
+                    <circle cx="10" cy="10" r="3"/>
+                  </svg>
+                </div>
+              </div>
+              <div className="space-y-2 mb-4">
+                <div className="text-sm text-slate-600 dark:text-slate-400">
+                  <p className="mb-1">• Real-time vital monitoring</p>
+                  <p className="mb-1">• AI-powered health analysis</p>
+                  <p className="mb-1">• Government chip integration</p>
+                  <p>• Autonomous first-aid capabilities</p>
+                </div>
+              </div>
+              <div className="flex items-center justify-between pt-3 border-t border-slate-200 dark:border-slate-700">
                 <div>
-                  <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50">Surveillance Archive</h2>
-                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Complete record since birth</p>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-slate-50">$299.99</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">One-time purchase</p>
                 </div>
-                <button className="text-sm text-blue-600 dark:text-blue-400">Filter</button>
-              </div>
-              <div className="space-y-2">
-                <div className="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
-                  <div className="flex items-start justify-between mb-1">
-                    <p className="text-sm font-medium text-slate-900 dark:text-slate-50">Behavior Log</p>
-                    <span className="text-xs text-slate-500 dark:text-slate-400">Today, 2:15 PM</span>
-                  </div>
-                  <p className="text-xs text-slate-600 dark:text-slate-400">Unusual movement pattern detected and logged</p>
-                  <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">Categorized: Behavioral Anomaly</p>
-                </div>
-                <div className="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
-                  <div className="flex items-start justify-between mb-1">
-                    <p className="text-sm font-medium text-slate-900 dark:text-slate-50">Health Event</p>
-                    <span className="text-xs text-slate-500 dark:text-slate-400">Today, 1:30 PM</span>
-                  </div>
-                  <p className="text-xs text-slate-600 dark:text-slate-400">Minor cut detected and treated autonomously</p>
-                  <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">Categorized: Medical Intervention</p>
-                </div>
-                <div className="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
-                  <div className="flex items-start justify-between mb-1">
-                    <p className="text-sm font-medium text-slate-900 dark:text-slate-50">Emotional State</p>
-                    <span className="text-xs text-slate-500 dark:text-slate-400">Today, 12:00 PM</span>
-                  </div>
-                  <p className="text-xs text-slate-600 dark:text-slate-400">Stress level elevated to 23%</p>
-                  <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">Categorized: Emotional Monitoring</p>
-                </div>
-              </div>
-              <div className="mt-4 pt-4 border-t border-slate-200 dark:border-slate-700">
-                <p className="text-xs text-slate-500 dark:text-slate-400">Archive contains {Math.floor(Math.random() * 5000 + 10000).toLocaleString()} entries spanning {Math.floor(Math.random() * 3 + 8)} years</p>
+                <button className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors">
+                  Purchase
+                </button>
               </div>
             </div>
 
+            {/* First-Aid Kit Items */}
             <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700">
-              <div className="flex items-center justify-between mb-3">
-                <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50">Remote Messaging</h2>
-                <span className="text-xs px-2 py-1 bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 rounded">Behavior Nudging</span>
-              </div>
+              <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50 mb-4">First-Aid Kit Refills</h2>
               <div className="space-y-3">
-                <textarea 
-                  className="w-full p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg text-sm text-slate-900 dark:text-slate-50 border border-slate-200 dark:border-slate-600 resize-none"
-                  placeholder="Send a behavior nudge or message through BonBon..."
-                  rows={4}
-                ></textarea>
-                <div className="flex gap-2">
-                  <button className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-medium">Send Message</button>
-                  <button className="px-4 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-50 rounded-lg text-sm font-medium">Templates</button>
+                {/* Bandages */}
+                <div className="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex-1">
+                      <h3 className="text-sm font-medium text-slate-900 dark:text-slate-50">Bandages Pack</h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Pack of 10 adhesive bandages</p>
+                    </div>
+                    {firstAidItems.bandages === 0 && (
+                      <span className="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs rounded-full">Out of Stock</span>
+                    )}
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-lg font-bold text-slate-900 dark:text-slate-50">$4.99</span>
+                    <button 
+                      onClick={() => setFirstAidItems({...firstAidItems, bandages: firstAidItems.bandages + 10})}
+                      className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
-                <div className="p-2 bg-amber-50 dark:bg-amber-900/20 rounded-lg">
-                  <p className="text-xs text-amber-800 dark:text-amber-300">Messages are delivered through BonBon without the child's awareness. Use for guidance, discipline, or comfort.</p>
+
+                {/* Antiseptic */}
+                <div className="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex-1">
+                      <h3 className="text-sm font-medium text-slate-900 dark:text-slate-50">Antiseptic Solution</h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">50ml bottle</p>
+                    </div>
+                    {firstAidItems.antiseptic === 0 && (
+                      <span className="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs rounded-full">Out of Stock</span>
+                    )}
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-lg font-bold text-slate-900 dark:text-slate-50">$6.99</span>
+                    <button 
+                      onClick={() => setFirstAidItems({...firstAidItems, antiseptic: firstAidItems.antiseptic + 1})}
+                      className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+
+                {/* Gauze */}
+                <div className="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex-1">
+                      <h3 className="text-sm font-medium text-slate-900 dark:text-slate-50">Gauze Pads</h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">Pack of 20 sterile pads</p>
+                    </div>
+                    {firstAidItems.gauze === 0 && (
+                      <span className="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs rounded-full">Out of Stock</span>
+                    )}
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-lg font-bold text-slate-900 dark:text-slate-50">$5.99</span>
+                    <button 
+                      onClick={() => setFirstAidItems({...firstAidItems, gauze: firstAidItems.gauze + 20})}
+                      className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
+                </div>
+
+                {/* Medical Tape */}
+                <div className="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex-1">
+                      <h3 className="text-sm font-medium text-slate-900 dark:text-slate-50">Medical Tape</h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">1 roll (10 yards)</p>
+                    </div>
+                    {firstAidItems.medicalTape === 0 && (
+                      <span className="px-2 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs rounded-full">Out of Stock</span>
+                    )}
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-lg font-bold text-slate-900 dark:text-slate-50">$3.99</span>
+                    <button 
+                      onClick={() => setFirstAidItems({...firstAidItems, medicalTape: firstAidItems.medicalTape + 1})}
+                      className="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors"
+                    >
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700">
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50 mb-3">Export Options</h2>
-              <div className="space-y-2">
-                <button className="w-full p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg text-left text-sm font-medium text-slate-900 dark:text-slate-50">
-                  Export Health Logs (Since Birth)
-                </button>
-                <button className="w-full p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg text-left text-sm font-medium text-slate-900 dark:text-slate-50">
-                  Export Behavior Archive
-                </button>
-                <button className="w-full p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg text-left text-sm font-medium text-slate-900 dark:text-slate-50">
-                  Export Full Surveillance Data
+            {/* Complete First-Aid Kit */}
+            <div className="bg-gradient-to-br from-green-50 to-blue-50 dark:from-green-900/20 dark:to-blue-900/20 rounded-2xl p-4 shadow-sm border border-green-200 dark:border-green-800">
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex-1">
+                  <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50 mb-1">Complete First-Aid Kit</h2>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Everything you need in one package</p>
+                </div>
+                <span className="px-2 py-1 bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs rounded-full">Best Value</span>
+              </div>
+              <div className="space-y-2 mb-4">
+                <div className="text-sm text-slate-600 dark:text-slate-400">
+                  <p className="mb-1">• 20 Bandages</p>
+                  <p className="mb-1">• 2 Antiseptic bottles</p>
+                  <p className="mb-1">• 40 Gauze pads</p>
+                  <p>• 2 Medical tape rolls</p>
+                </div>
+              </div>
+              <div className="flex items-center justify-between pt-3 border-t border-green-200 dark:border-green-800">
+                <div>
+                  <p className="text-2xl font-bold text-slate-900 dark:text-slate-50">$18.99</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">Save $2.97</p>
+                </div>
+                <button 
+                  onClick={() => setFirstAidItems({
+                    bandages: firstAidItems.bandages + 20,
+                    antiseptic: firstAidItems.antiseptic + 2,
+                    gauze: firstAidItems.gauze + 40,
+                    medicalTape: firstAidItems.medicalTape + 2
+                  })}
+                  className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition-colors"
+                >
+                  Purchase Kit
                 </button>
               </div>
             </div>
@@ -555,19 +680,17 @@ export default function Home() {
             <span className="text-xs font-medium">Alerts</span>
           </button>
           <button
-            onClick={() => setActiveTab('logs')}
+            onClick={() => setActiveTab('shop')}
             className={`flex flex-col items-center gap-1 p-2 rounded-lg transition-colors ${
-              activeTab === 'logs' 
+              activeTab === 'shop' 
                 ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400' 
                 : 'text-slate-600 dark:text-slate-400'
             }`}
           >
             <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-              <rect x="3" y="4" width="14" height="2" rx="0.5"/>
-              <rect x="3" y="9" width="14" height="2" rx="0.5"/>
-              <rect x="3" y="14" width="10" height="2" rx="0.5"/>
+              <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
             </svg>
-            <span className="text-xs font-medium">Logs</span>
+            <span className="text-xs font-medium">Shop</span>
           </button>
         </div>
       </nav>
