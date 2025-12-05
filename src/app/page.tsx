@@ -34,10 +34,11 @@ export default function Home() {
     riskTier: 'Tier 2 - Low Risk',
     chipId: 'CH-2047-89234',
     complianceStatus: 'Active',
+    wellnessIndex: 82,
   };
 
   const recentAlerts = [
-    { type: 'emotional', message: 'Elevated stress detected', time: '2 min ago', severity: 'medium' },
+    { type: 'emotional', message: 'Mention of stress', time: '2 min ago', severity: 'medium' },
     { type: 'health', message: 'Minor cut detected on left hand', time: '15 min ago', severity: 'low' },
     { type: 'behavior', message: 'Unusual movement pattern', time: '1 hour ago', severity: 'low' },
   ];
@@ -221,15 +222,52 @@ export default function Home() {
             </div>
 
             <div className="bg-white dark:bg-slate-800 rounded-2xl p-4 shadow-sm border border-slate-200 dark:border-slate-700">
-              <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50 mb-3">Neural Pattern Monitoring</h2>
-              <div className="p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg">
-                <p className="text-sm text-slate-600 dark:text-slate-400 mb-2">Current Pattern: Baseline</p>
-                <div className="h-24 bg-slate-200 dark:bg-slate-600 rounded flex items-center justify-center">
-                  <p className="text-xs text-slate-500 dark:text-slate-400">Neural activity visualization</p>
+              <h2 className="text-lg font-semibold text-slate-900 dark:text-slate-50 mb-3">Therapy Session Summary</h2>
+              <div className="space-y-3">
+                <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border-l-4 border-blue-500">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <span className="text-xs font-medium text-blue-700 dark:text-blue-400">BonBon</span>
+                    </div>
+                    <span className="text-xs text-slate-500 dark:text-slate-400">2:15 PM</span>
+                  </div>
+                  <p className="text-sm text-slate-700 dark:text-slate-300">"How are you feeling today? I noticed your stress levels were elevated earlier."</p>
+                </div>
+                <div className="p-3 bg-slate-50 dark:bg-slate-700/50 rounded-lg border-l-4 border-slate-400">
+                  <div className="flex items-start justify-between mb-2">
+                    <span className="text-xs font-medium text-slate-700 dark:text-slate-300">Child</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400">2:16 PM</span>
+                  </div>
+                  <p className="text-sm text-slate-700 dark:text-slate-300">"I'm okay... just worried about the test tomorrow."</p>
+                </div>
+                <div className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border-l-4 border-blue-500">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                      <span className="text-xs font-medium text-blue-700 dark:text-blue-400">BonBon</span>
+                    </div>
+                    <span className="text-xs text-slate-500 dark:text-slate-400">2:17 PM</span>
+                  </div>
+                  <p className="text-sm text-slate-700 dark:text-slate-300">"That's completely understandable. Let's work through some breathing exercises together. Remember, you've prepared well for this."</p>
+                </div>
+                <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-700">
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Session Duration:</p>
+                    <p className="text-xs text-slate-900 dark:text-slate-50">8 minutes</p>
+                  </div>
+                  <div className="flex items-center justify-between mb-2">
+                    <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Emotional State:</p>
+                    <p className="text-xs text-green-600 dark:text-green-400">Improved</p>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <p className="text-xs font-medium text-slate-600 dark:text-slate-400">Key Topics:</p>
+                    <p className="text-xs text-slate-900 dark:text-slate-50">Anxiety, Test Preparation</p>
+                  </div>
                 </div>
                 <div className="mt-3 flex gap-2">
-                  <button className="flex-1 px-3 py-2 bg-blue-600 text-white text-sm rounded-lg">View Details</button>
-                  <button className="flex-1 px-3 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-50 text-sm rounded-lg">Export Data</button>
+                  <button className="flex-1 px-3 py-2 bg-blue-600 text-white text-sm rounded-lg">View Full Session</button>
+                  <button className="flex-1 px-3 py-2 bg-slate-200 dark:bg-slate-700 text-slate-900 dark:text-slate-50 text-sm rounded-lg">Export Transcript</button>
                 </div>
               </div>
             </div>
@@ -295,7 +333,7 @@ export default function Home() {
                   <div className="text-center">
                     <div className="w-16 h-16 border-4 border-white/20 rounded-full mx-auto mb-2"></div>
                     <p className="text-white/60 text-sm">Live Feed</p>
-                    <p className="text-white/40 text-xs mt-1">Child's Perspective</p>
+                    <p className="text-white/40 text-xs mt-1">BonBon's Perspective</p>
                   </div>
                 </div>
                 <div className="absolute top-2 right-2">
@@ -362,8 +400,8 @@ export default function Home() {
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <div>
-                    <p className="text-sm font-medium text-slate-900 dark:text-slate-50">Emotional Alerts</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Notify on stress spikes</p>
+                    <p className="text-sm font-medium text-slate-900 dark:text-slate-50">Therapy Alerts</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Notify on unusual ideas</p>
                   </div>
                   <div className="w-12 h-6 bg-blue-600 rounded-full relative">
                     <div className="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5"></div>
@@ -381,7 +419,7 @@ export default function Home() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-sm font-medium text-slate-900 dark:text-slate-50">Behavior Alerts</p>
-                    <p className="text-xs text-slate-500 dark:text-slate-400">Notify on unusual patterns</p>
+                    <p className="text-xs text-slate-500 dark:text-slate-400">Notify on new patterns</p>
                   </div>
                   <div className="w-12 h-6 bg-blue-600 rounded-full relative">
                     <div className="w-5 h-5 bg-white rounded-full absolute right-0.5 top-0.5"></div>
@@ -443,7 +481,7 @@ export default function Home() {
                 </div>
                 <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center overflow-hidden">
                   {/* replace with real 3d model */}
-                  <img src="/bonbon-logo.png" alt="BonBon Device" className="w-14 h-14 object-contain"/> 
+                  <img src="/bonbon-side.png" alt="BonBon Device" className="w-16 h-16 object-contain rounded-xl"/> 
                 </div>
               </div>
               <div className="space-y-2 mb-4">
